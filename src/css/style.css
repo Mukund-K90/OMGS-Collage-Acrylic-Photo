@@ -285,3 +285,7 @@ body {
     color: #03A9F4;
     border: 1px solid #03A9F4;
 }
+
+#fontStyleSelect{
+display: none;
+}

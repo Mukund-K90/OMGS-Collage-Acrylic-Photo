@@ -8,6 +8,7 @@ const downloadBtn = document.getElementById('downloadBtn');
 const collagePhoto = document.querySelector('.collage-frame');
 const iminus = document.getElementById('iminus');
 const iplus = document.getElementById('iplus');
+const fontFamilyOptions = document.getElementById('fontStyleSelect');
 let activeTextBox = null;
 
 document.querySelectorAll('.small-img, .big-img').forEach(slot => {
@@ -249,6 +250,7 @@ function makeDraggable(element, handle) {
 document.getElementById('addTextBtn').addEventListener('click', function () {
     textInput.style.display = 'block';
     closeInputBtn.style.display = 'block';
+    fontFamilyOptions.style.display = 'block';
     if (!activeTextBox) {
         const textColor = document.getElementById('textColor').value;
 
@@ -314,3 +316,10 @@ iplus.addEventListener('click', function () {
         attachHandles(activeTextBox);
     }
 });
+
+function changeFontFamily() {
+    const selectedFont = document.getElementById('fontStyleSelect').value;
+    if (activeTextBox) {
+        activeTextBox.style.fontFamily = selectedFont;
+    }
+}

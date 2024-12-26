@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acrylic Fridge Magnets</title>
+    <link rel="stylesheet" href="/src/css/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <% Object.keys(dictionary).forEach((key, index)=> { %>
+            <a href="/customize/<%= dictionary[key].type %>" class="card-link">
+                <div class="card">
+                    <img src="<%= dictionary[key].image %>" alt="<%= key %>">
+                    <div class="description">
+                        <%= dictionary[key].description %>
+                    </div>
+                </div>
+            </a>
+        <% }); %>
+    </div>
+</body>
+
+</html>

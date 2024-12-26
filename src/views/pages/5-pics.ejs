@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collage Creator</title>
+    <link rel="stylesheet" href="/src/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+    <div class="content">
+        <h2>5 Pics Collage Premium Acrylic Wall Photo</h2>
+        <div class="collage-frame">
+            <div class="big-img" data-slot="1">
+                <img class="previewImage" id="previewImage1" src="" alt="Click to upload" style="display: none;">
+                <input type="file" id="fileInput1" accept="image/*" style="display: none;">
+                <p class="placeholderText"><i class="fa-solid fa-upload"></i> Upload</p>
+            </div>
+            <div class="small-img" data-slot="2">
+                <img class="previewImage" id="previewImage2" src="" alt="Click to upload" style="display: none;">
+                <input type="file" id="fileInput2" accept="image/*" style="display: none;">
+                <p class="placeholderText"><i class="fa-solid fa-upload"></i> Upload</p>
+            </div>
+            <div class="small-img" data-slot="3">
+                <img class="previewImage" id="previewImage3" src="" alt="Click to upload" style="display: none;">
+                <input type="file" id="fileInput3" accept="image/*" style="display: none;">
+                <p class="placeholderText"><i class="fa-solid fa-upload"></i> Upload</p>
+            </div>
+            <div class="small-img" data-slot="4">
+                <img class="previewImage" id="previewImage4" src="" alt="Click to upload" style="display: none;">
+                <input type="file" id="fileInput4" accept="image/*" style="display: none;">
+                <p class="placeholderText"><i class="fa-solid fa-upload"></i> Upload</p>
+            </div>
+            <div class="small-img" data-slot="5">
+                <img class="previewImage" id="previewImage5" src="" alt="Click to upload" style="display: none;">
+                <input type="file" id="fileInput5" accept="image/*" style="display: none;">
+                <p class="placeholderText"><i class="fa-solid fa-upload"></i> Upload</p>
+            </div>
+        </div>
+        <div>
+        </div>
+        <div class="row">
+            <input type="color" id="textColor" value="#000000" oninput="updatePreview()">
+            <div class="row">
+                <button id="iminus">-</button>
+                AAA
+                <button id="iplus">+</button>
+                <p id="reset">&#8635;</p>
+            </div>
+        </div>
+        <div class="textModal">
+            <input type="text" id="textInput" placeholder="Enter text" oninput="updatePreview()">
+            <a id="closeText"><i class="fa-solid fa-xmark"></i></a>
+            <button id="addTextBtn">Add New Text Field</button>
+        </div>
+    </div>
+    <script src="/src/js/main.js"></script>
+</body>
+
+</html>

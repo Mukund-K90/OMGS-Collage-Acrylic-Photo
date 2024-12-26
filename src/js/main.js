@@ -2,6 +2,12 @@ const textInput = document.getElementById('textInput');
 const closeInputBtn = document.getElementById('closeText');
 const addTextBtn = document.getElementById('addTextBtn');
 const resteBtn = document.getElementById('reset');
+const allSizeBtn = document.querySelectorAll('.size-btn');
+const allThicknessBtn = document.querySelectorAll('.thickness-btn');
+const downloadBtn = document.getElementById('downloadBtn');
+const collagePhoto = document.querySelector('.collage-frame');
+const iminus = document.getElementById('iminus');
+const iplus = document.getElementById('iplus');
 let activeTextBox = null;
 
 document.querySelectorAll('.small-img, .big-img').forEach(slot => {
@@ -23,26 +29,31 @@ document.querySelectorAll('.small-img, .big-img').forEach(slot => {
                 placeholder.style.display = 'none';
             };
             reader.readAsDataURL(file);
-            input.disabled = true;
+            downloadBtn.style.display = 'block';
             makeDraggable(previewImage, { resize: 'resize', rotate: 'rotate' });
             addResizeHandle(previewImage);
-
+            addRotateHandle(previewImage);
+            input.disabled = true;
         }
     });
 });
 
 function addResizeHandle(imageElement) {
     const resizeHandle = document.createElement('div');
-    resizeHandle.className = 'resize';
+    resizeHandle.className = 'resize-handle';
     resizeHandle.style.position = 'absolute';
-    resizeHandle.style.right = '65%';
-    resizeHandle.style.bottom = '20%';
+    resizeHandle.style.right = '0';
+    resizeHandle.style.bottom = '0';
+    resizeHandle.style.width = '20px';
+    resizeHandle.style.height = '20px';
     resizeHandle.style.cursor = 'nwse-resize';
-    resizeHandle.innerText = '+';
-    resizeHandle.style.color = 'blue';
-    resizeHandle.style.backgroundColor = 'transparent';
+    resizeHandle.style.backgroundColor = 'blue';
+    resizeHandle.style.borderRadius = '50%';
+    resizeHandle.style.zIndex = '10';
 
-    imageElement.appendChild(resizeHandle);
+    // Add the handle to the image's parent container
+    imageElement.parentElement.style.position = 'relative';
+    imageElement.parentElement.appendChild(resizeHandle);
 
     resizeHandle.addEventListener('mousedown', function (e) {
         e.stopPropagation();
@@ -66,17 +77,21 @@ function addResizeHandle(imageElement) {
 
 function addRotateHandle(imageElement) {
     const rotateHandle = document.createElement('div');
-    rotateHandle.className = 'rotate';
+    rotateHandle.className = 'rotate-handle';
     rotateHandle.style.position = 'absolute';
-    rotateHandle.style.top = '15%';
-    rotateHandle.style.left = '20%';
+    rotateHandle.style.top = '0';
+    rotateHandle.style.left = '50%';
     rotateHandle.style.transform = 'translateX(-50%)';
+    rotateHandle.style.width = '20px';
+    rotateHandle.style.height = '20px';
     rotateHandle.style.cursor = 'pointer';
-    rotateHandle.innerHTML = '&#8635;';
-    rotateHandle.style.color = 'blue';
-    rotateHandle.style.backgroundColor = 'transparent';
+    rotateHandle.style.backgroundColor = 'blue';
+    rotateHandle.style.borderRadius = '50%';
+    rotateHandle.style.zIndex = '10';
 
-    imageElement.appendChild(rotateHandle);
+    // Add the handle to the image's parent container
+    imageElement.parentElement.style.position = 'relative';
+    imageElement.parentElement.appendChild(rotateHandle);
 
     rotateHandle.addEventListener('mousedown', function (e) {
         e.stopPropagation();
@@ -86,7 +101,7 @@ function addRotateHandle(imageElement) {
 
         function rotate(e) {
             const angle = Math.atan2(e.clientY - centerY, e.clientX - centerX);
-            const degree = (angle * (180 / Math.PI) + 90) % 360;
+            const degree = (angle * (180 / Math.PI)) % 360;
             imageElement.style.transform = `rotate(${degree}deg)`;
         }
 
@@ -261,4 +276,41 @@ document.getElementById('closeText').addEventListener('click', function () {
     closeInputBtn.style.display = 'none';
 });
 
+allSizeBtn.forEach(btn => {
+    btn.addEventListener('click', function () {
+        allSizeBtn.forEach(button => button.classList.remove('active'));
+        this.classList.add('active');
+    });
+});
 
+allThicknessBtn.forEach(btn => {
+    btn.addEventListener('click', function () {
+        allThicknessBtn.forEach(button => button.classList.remove('active'));
+        this.classList.add('active');
+    });
+});
+
+downloadBtn.addEventListener('click', () => {
+    html2canvas(collagePhoto, { backgroundColor: null }).then((canvas) => {
+        const link = document.createElement('a');
+        link.download = 'customized-image.png';
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+    });
+});
+
+iminus.addEventListener('click', function () {
+    if (activeTextBox) {
+        const currentFontSize = parseInt(window.getComputedStyle(activeTextBox).fontSize);
+        activeTextBox.style.fontSize = (currentFontSize - 5) + 'px';
+        attachHandles(activeTextBox);
+    }
+});
+
+iplus.addEventListener('click', function () {
+    if (activeTextBox) {
+        const currentFontSize = parseInt(window.getComputedStyle(activeTextBox).fontSize);
+        activeTextBox.style.fontSize = (currentFontSize + 5) + 'px';
+        attachHandles(activeTextBox);
+    }
+});

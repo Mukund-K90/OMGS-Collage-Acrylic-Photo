@@ -3,7 +3,6 @@ body {
     margin: 0;
     padding: 0;
     display: flex;
-    height: 100vh;
 }
 
 .container {
@@ -236,4 +235,53 @@ body {
     display: none;
     font-weight: bold;
     font-size: 20px;
+}
+
+
+.size-btn {
+    padding: 8px 8px;
+    background-color: #fff;
+    cursor: pointer;
+    border-radius: 15%;
+    display: inline-block;
+    color: #212529;
+    border: 1px solid #212529;
+}
+
+.size-btn.active {
+    background-color: #212529;
+    font-weight: bold;
+    color: #f0f0f0;
+}
+
+.thickness-btn {
+    padding: 8px 8px;
+    background-color: #fff;
+    cursor: pointer;
+    border-radius: 15%;
+    display: inline-block;
+    color: #212529;
+    border: 1px solid #212529;
+}
+
+.thickness-btn.active {
+    background-color: #212529;
+    font-weight: bold;
+    color: #f0f0f0;
+}
+
+.download {
+    /* display: none; */
+    background: #03A9F4;
+    font-size: 25px;
+    border: 1px solid #f0f0f0;
+    height: 50px;
+    width: 170px;
+}
+
+.download:hover {
+    background: #f0f0f0;
+    font-size: 20px;
+    color: #03A9F4;
+    border: 1px solid #03A9F4;
 }

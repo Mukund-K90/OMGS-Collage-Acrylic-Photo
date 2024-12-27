@@ -3,6 +3,7 @@ body {
     margin: 0;
     padding: 0;
     display: flex;
+    user-select: none;
 }
 
 .container {
@@ -75,6 +76,7 @@ body {
     font-size: 0.9rem;
     color: #555;
     background: #555;
+    position: relative;
 }
 
 .big-img {
@@ -98,7 +100,8 @@ body {
 
 .small-img img,
 .big-img img {
-    object-fit: contain;
+    object-fit: cover;
+    position: relative;
 }
 
 .placeholderText {
@@ -222,19 +225,34 @@ body {
 }
 
 .resize {
-    background-color: white;
-    cursor: pointer;
-    display: none;
+    position: absolute;
+    right: 49%;
+    bottom: -5%;
+    cursor: crosshair;
+    z-index: 10;
+    color: blue;
+    font-size: 25px;
+    display: flex;
     font-weight: bold;
-    font-size: 20px;
 }
 
+
 .rotate {
-    background-color: white;
-    cursor: pointer;
-    display: none;
+    position: absolute;
+    top: -6%;
+    left: 50%;
+    cursor: grab;
+    z-index: 10;
+    color: blue;
+    font-size: 25px;
+    display: flex;
+    transform: translateX(-50%);
     font-weight: bold;
-    font-size: 20px;
+}
+
+.resize,
+.rotate {
+    display: none;
 }
 
 
@@ -286,6 +304,6 @@ body {
     border: 1px solid #03A9F4;
 }
 
-#fontStyleSelect{
-display: none;
+#fontStyleSelect {
+    display: none;
 }

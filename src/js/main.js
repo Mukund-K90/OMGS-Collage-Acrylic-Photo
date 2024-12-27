@@ -32,29 +32,20 @@ document.querySelectorAll('.small-img, .big-img').forEach(slot => {
             reader.readAsDataURL(file);
             downloadBtn.style.display = 'block';
             makeDraggable(previewImage, { resize: 'resize', rotate: 'rotate' });
-            addResizeHandle(previewImage);
-            addRotateHandle(previewImage);
+            addResizeHandle(previewImage, slot);
+            addRotateHandle(previewImage, slot);
             input.disabled = true;
         }
     });
 });
 
-function addResizeHandle(imageElement) {
+function addResizeHandle(imageElement, slot) {
     const resizeHandle = document.createElement('div');
-    resizeHandle.className = 'resize-handle';
-    resizeHandle.style.position = 'absolute';
-    resizeHandle.style.right = '0';
-    resizeHandle.style.bottom = '0';
-    resizeHandle.style.width = '20px';
-    resizeHandle.style.height = '20px';
-    resizeHandle.style.cursor = 'nwse-resize';
-    resizeHandle.style.backgroundColor = 'blue';
-    resizeHandle.style.borderRadius = '50%';
-    resizeHandle.style.zIndex = '10';
+    resizeHandle.className = 'resize';
+    resizeHandle.innerHTML = '+';
 
-    // Add the handle to the image's parent container
-    imageElement.parentElement.style.position = 'relative';
-    imageElement.parentElement.appendChild(resizeHandle);
+    slot.parentElement.style.position = 'relative';
+    slot.parentElement.appendChild(resizeHandle);
 
     resizeHandle.addEventListener('mousedown', function (e) {
         e.stopPropagation();
@@ -76,23 +67,13 @@ function addResizeHandle(imageElement) {
     });
 }
 
-function addRotateHandle(imageElement) {
+function addRotateHandle(imageElement, slot) {
     const rotateHandle = document.createElement('div');
-    rotateHandle.className = 'rotate-handle';
-    rotateHandle.style.position = 'absolute';
-    rotateHandle.style.top = '0';
-    rotateHandle.style.left = '50%';
-    rotateHandle.style.transform = 'translateX(-50%)';
-    rotateHandle.style.width = '20px';
-    rotateHandle.style.height = '20px';
-    rotateHandle.style.cursor = 'pointer';
-    rotateHandle.style.backgroundColor = 'blue';
-    rotateHandle.style.borderRadius = '50%';
-    rotateHandle.style.zIndex = '10';
+    rotateHandle.className = 'rotate';
+    rotateHandle.innerHTML = '&#8635;';
 
-    // Add the handle to the image's parent container
-    imageElement.parentElement.style.position = 'relative';
-    imageElement.parentElement.appendChild(rotateHandle);
+    slot.parentElement.style.position = 'relative';
+    slot.parentElement.appendChild(rotateHandle);
 
     rotateHandle.addEventListener('mousedown', function (e) {
         e.stopPropagation();
@@ -202,6 +183,8 @@ function attachHandles(element) {
 }
 
 function makeDraggable(element, handle) {
+
+    console.log(handle);
     let isDragging = false;
     let offsetX, offsetY;
 
@@ -213,8 +196,8 @@ function makeDraggable(element, handle) {
 
         element.style.border = '2px dashed #248EE6';
 
-        const resizeHandle = element.querySelector(`.${handle.resize}`);
-        const rotateHandle = element.querySelector(`.${handle.rotate}`);
+        const resizeHandle = document.querySelector(`.${handle.resize}`);
+        const rotateHandle = document.querySelector(`.${handle.rotate}`);
 
         if (resizeHandle && rotateHandle) {
             resizeHandle.style.display = 'block';
@@ -238,8 +221,8 @@ function makeDraggable(element, handle) {
         if (!element.contains(e.target)) {
             element.style.border = 'none';
 
-            const resizeHandle = element.querySelector(`.${handle.resize}`);
-            const rotateHandle = element.querySelector(`.${handle.rotate}`);
+            const resizeHandle = document.querySelector(`.${handle.resize}`);
+            const rotateHandle = document.querySelector(`.${handle.rotate}`);
 
             if (resizeHandle) resizeHandle.style.display = 'none';
             if (rotateHandle) rotateHandle.style.display = 'none';

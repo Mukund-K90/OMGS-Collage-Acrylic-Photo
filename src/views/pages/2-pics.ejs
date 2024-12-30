@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collage Creator</title>
+    <link rel="stylesheet" href="/src/css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<style>
+    .collage-frame {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr;
+    }
+</style>
+<body>
+    <div class="content">
+        <h2>5 Pics Collage Premium Acrylic Wall Photo</h2>
+        <div class="collage-frame">
+            <div class="big-img" data-slot="1">
+                <img class="previewImage" id="previewImage1" src="" alt="Click to upload" style="display: none;">
+                <input type="file" id="fileInput1" accept="image/*" style="display: none;">
+                <p class="placeholderText"><i class="fa-solid fa-upload"></i> Upload</p>
+            </div>
+            <div class="small-img" data-slot="2">
+                <img class="previewImage" id="previewImage2" src="" alt="Click to upload" style="display: none;">
+                <input type="file" id="fileInput2" accept="image/*" style="display: none;">
+                <p class="placeholderText"><i class="fa-solid fa-upload"></i> Upload</p>
+            </div>
+        </div>
+        <div>
+        </div>
+        <div class="row">
+            <select id="fontStyleSelect" style="width: 100%; margin-bottom: 10px;" onchange="changeFontFamily()">
+                <option value="Arial" style="font-family: Arial;">Arial</option>
+                <option value="Times New Roman" style="font-family: Times New Roman;">Times New Roman</option>
+                <option value="Courier New" style="font-family: Courier New;">Courier New</option>
+                <option value="Verdana" style="font-family: Verdana;">Verdana</option>
+                <option value="cursive" style="font-family: cursive;">cursive</option>
+                <option value="fantasy" style="font-family: fantasy;">fantasy</option>
+                <option value="monospace" style="font-family: monospace;">monospace</option>
+                <option value="Lucida Console" style="font-family: Lucida Console;">Lucida Console</option>
+                <option value="Lucida Sans Unicode" style="font-family: Lucida Sans Unicode;">Lucida Sans Unicode
+                </option>
+                <option value="Impact" style="font-family: Impact;">Impact</option>
+                <option value="Georgia" style="font-family: Georgia;">Georgia</option>
+            </select>
+            <input type="color" id="textColor" value="#000000" oninput="updatePreview()">
+            <div class="row">
+                <button id="iminus">-</button>
+                AAA
+                <button id="iplus">+</button>
+                <p id="reset">&#8635;</p>
+            </div>
+        </div>
+        <div class="textModal">
+            <input type="text" id="textInput" placeholder="Enter text" oninput="updatePreview()">
+            <a id="closeText"><i class="fa-solid fa-xmark"></i></a>
+            <button id="addTextBtn">Add New Text Field</button>
+        </div>
+        <div class="row">
+            <h3>Size (Inch)</h3>
+            <button class="size-btn active" data-ratio="12/9">12x9</button>
+            <button class="size-btn" data-ratio="11/11">16x12</button>
+            <button class="size-btn" data-ratio="11/11">21x15</button>
+            <button class="size-btn" data-ratio="11/11">35x23</button>
+            <button class="size-btn" data-ratio="11/11">48x36</button>
+        </div>
+        <div class="row">
+            <h3>Thickness (mm)</h3>
+            <button class="thickness-btn active">5 MM</button>
+            <button class="thickness-btn">5 MM</button>
+            <button class="thickness-btn">8 MM (Premium)</button>
+        </div>
+        <button class="upload-btn download" id="downloadBtn"><i class="fa-solid fa-download"></i></button>
+    </div>
+    <script src="/src/js/main.js"></script>
+</body>
+
+</html>

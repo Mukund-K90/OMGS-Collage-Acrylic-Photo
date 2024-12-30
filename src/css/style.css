@@ -217,7 +217,7 @@ body {
 
 .resize {
     position: absolute;
-    right: 49%;
+    right: 0;
     bottom: -5%;
     cursor: crosshair;
     z-index: 10;
@@ -284,6 +284,7 @@ body {
     border: 1px solid #f0f0f0;
     height: 50px;
     width: 170px;
+    display: none;
 }
 
 .download:hover {

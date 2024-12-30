@@ -9,10 +9,13 @@ const collagePhoto = document.querySelector('.collage-frame');
 const iminus = document.getElementById('iminus');
 const iplus = document.getElementById('iplus');
 const fontFamilyOptions = document.getElementById('fontStyleSelect');
-
+let uploadedImagesCount = 0;
+let totalImages = 0;
 let activeTextBox = null;
 
 document.querySelectorAll(".small-img, .big-img").forEach((slot) => {
+    totalImages = document.querySelectorAll(".small-img, .big-img").length;
+
     const input = slot.querySelector("input");
     const placeholder = slot.querySelector("p");
     const previewImage = slot.querySelector("img");
@@ -31,6 +34,7 @@ document.querySelectorAll(".small-img, .big-img").forEach((slot) => {
                 placeholder.style.display = "none";
                 input.disabled = true;
                 setActiveImage(previewImage);
+                incrementUploadedImages();
             };
             reader.readAsDataURL(file);
         }
@@ -39,8 +43,15 @@ document.querySelectorAll(".small-img, .big-img").forEach((slot) => {
     previewImage.addEventListener("click", () => {
         setActiveImage(previewImage);
     });
-    
+
 });
+
+function incrementUploadedImages() {
+    uploadedImagesCount++;
+    if (totalImages === uploadedImagesCount) {
+        document.getElementById("downloadBtn").style.display = "block";
+    }
+}
 
 function setActiveImage(imageElement) {
     removeExistingHandles();

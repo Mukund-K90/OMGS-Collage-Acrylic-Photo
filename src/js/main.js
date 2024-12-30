@@ -9,6 +9,8 @@ const collagePhoto = document.querySelector('.collage-frame');
 const iminus = document.getElementById('iminus');
 const iplus = document.getElementById('iplus');
 const fontFamilyOptions = document.getElementById('fontStyleSelect');
+const placeholderText = document.querySelectorAll('.placeholderText');
+
 let activeTextBox = null;
 
 document.querySelectorAll(".small-img, .big-img").forEach((slot) => {
@@ -295,12 +297,16 @@ allThicknessBtn.forEach(btn => {
 });
 
 downloadBtn.addEventListener('click', () => {
+    placeholderText.forEach((e) => { e.style.display = 'none' });
     html2canvas(collagePhoto, { backgroundColor: null }).then((canvas) => {
         const link = document.createElement('a');
         link.download = 'customized-image.png';
         link.href = canvas.toDataURL('image/png');
         link.click();
     });
+    setTimeout(() => {
+        placeholderText.forEach((e) => { e.style.display = 'flex' });
+    }, 2000);
 });
 
 iminus.addEventListener('click', function () {
@@ -325,3 +331,7 @@ function changeFontFamily() {
         activeTextBox.style.fontFamily = selectedFont;
     }
 }
+
+resteBtn.addEventListener('click', () => {
+    location.reload();
+});

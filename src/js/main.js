@@ -11,41 +11,53 @@ const iplus = document.getElementById('iplus');
 const fontFamilyOptions = document.getElementById('fontStyleSelect');
 let activeTextBox = null;
 
-document.querySelectorAll('.small-img, .big-img').forEach(slot => {
-    const input = slot.querySelector('input');
-    const placeholder = slot.querySelector('p');
-    const previewImage = slot.querySelector('img');
+document.querySelectorAll(".small-img, .big-img").forEach((slot) => {
+    const input = slot.querySelector("input");
+    const placeholder = slot.querySelector("p");
+    const previewImage = slot.querySelector("img");
 
-    slot.addEventListener('click', () => {
+    slot.addEventListener("click", () => {
         input.click();
     });
 
-    input.addEventListener('change', () => {
+    input.addEventListener("change", () => {
         const file = input.files[0];
         if (file) {
             const reader = new FileReader();
             reader.onload = () => {
                 previewImage.src = reader.result;
-                previewImage.style.display = 'block';
-                placeholder.style.display = 'none';
+                previewImage.style.display = "block";
+                placeholder.style.display = "none";
+                input.disabled = true;
+                setActiveImage(previewImage);
             };
             reader.readAsDataURL(file);
-            downloadBtn.style.display = 'block';
-            makeDraggable(previewImage, { resize: 'resize', rotate: 'rotate' });
-            addResizeHandle(previewImage, slot);
-            addRotateHandle(previewImage, slot);
-            input.disabled = true;
         }
     });
+
+    previewImage.addEventListener("click", () => {
+        setActiveImage(previewImage);
+    });
 });
+
+function setActiveImage(imageElement) {
+    removeExistingHandles();
+    makeDraggable(imageElement, { resize: 'resize', rotate: 'rotate' });
+    addResizeHandle(imageElement);
+    addRotateHandle(imageElement);
+}
+
+function removeExistingHandles() {
+    document.querySelectorAll(".resize, .rotate").forEach((handle) => handle.remove());
+}
 
 function addResizeHandle(imageElement, slot) {
     const resizeHandle = document.createElement('div');
     resizeHandle.className = 'resize';
     resizeHandle.innerHTML = '+';
 
-    slot.parentElement.style.position = 'relative';
-    slot.parentElement.appendChild(resizeHandle);
+    collagePhoto.style.position = 'relative';
+    collagePhoto.appendChild(resizeHandle);
 
     resizeHandle.addEventListener('mousedown', function (e) {
         e.stopPropagation();
@@ -72,8 +84,8 @@ function addRotateHandle(imageElement, slot) {
     rotateHandle.className = 'rotate';
     rotateHandle.innerHTML = '&#8635;';
 
-    slot.parentElement.style.position = 'relative';
-    slot.parentElement.appendChild(rotateHandle);
+    collagePhoto.style.position = 'relative';
+    collagePhoto.appendChild(rotateHandle);
 
     rotateHandle.addEventListener('mousedown', function (e) {
         e.stopPropagation();
@@ -183,19 +195,10 @@ function attachHandles(element) {
 }
 
 function makeDraggable(element, handle) {
-
-    console.log(handle);
     let isDragging = false;
     let offsetX, offsetY;
 
-    element.addEventListener('mousedown', function (e) {
-        isDragging = true;
-        offsetX = e.clientX - element.offsetLeft;
-        offsetY = e.clientY - element.offsetTop;
-        element.style.cursor = 'grabbing';
-
-        element.style.border = '2px dashed #248EE6';
-
+    element.addEventListener('click', function (e) {
         const resizeHandle = document.querySelector(`.${handle.resize}`);
         const rotateHandle = document.querySelector(`.${handle.rotate}`);
 
@@ -203,6 +206,22 @@ function makeDraggable(element, handle) {
             resizeHandle.style.display = 'block';
             rotateHandle.style.display = 'block';
         }
+
+        element.style.border = '2px dashed #248EE6';
+    })
+    element.addEventListener('mousedown', function (e) {
+        const resizeHandle = document.querySelector(`.${handle.resize}`);
+        const rotateHandle = document.querySelector(`.${handle.rotate}`);
+
+        if (resizeHandle && rotateHandle) {
+            resizeHandle.style.display = 'block';
+            rotateHandle.style.display = 'block';
+        }
+        isDragging = true;
+        offsetX = e.clientX - element.offsetLeft;
+        offsetY = e.clientY - element.offsetTop;
+        element.style.cursor = 'grabbing';
+
     });
 
     document.addEventListener('mousemove', function (e) {

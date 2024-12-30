@@ -64,7 +64,7 @@ function removeExistingHandles() {
     document.querySelectorAll(".resize, .rotate").forEach((handle) => handle.remove());
 }
 
-function addResizeHandle(imageElement, slot) {
+function addResizeHandle(imageElement) {
     const resizeHandle = document.createElement('div');
     resizeHandle.className = 'resize';
     resizeHandle.innerHTML = '+';
@@ -92,7 +92,7 @@ function addResizeHandle(imageElement, slot) {
     });
 }
 
-function addRotateHandle(imageElement, slot) {
+function addRotateHandle(imageElement) {
     const rotateHandle = document.createElement('div');
     rotateHandle.className = 'rotate';
     rotateHandle.innerHTML = '&#8635;';

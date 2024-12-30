@@ -39,7 +39,7 @@ document.querySelectorAll(".small-img, .big-img").forEach((slot) => {
     previewImage.addEventListener("click", () => {
         setActiveImage(previewImage);
     });
-
+    
 });
 
 function setActiveImage(imageElement) {
@@ -200,12 +200,7 @@ function makeDraggable(element, handle) {
     let isDragging = false;
     let offsetX, offsetY;
 
-    element.addEventListener('mousedown', function (e) {
-        isDragging = true;
-        offsetX = e.clientX - element.offsetLeft;
-        offsetY = e.clientY - element.offsetTop;
-        element.style.cursor = 'grabbing';
-
+    element.addEventListener('click', function (e) {
         const resizeHandle = document.querySelector(`.${handle.resize}`);
         const rotateHandle = document.querySelector(`.${handle.rotate}`);
 
@@ -213,29 +208,28 @@ function makeDraggable(element, handle) {
             resizeHandle.style.display = 'block';
             rotateHandle.style.display = 'block';
         }
+
+        element.style.border = '2px dashed #248EE6';
+    })
+    element.addEventListener('mousedown', function (e) {
+        const resizeHandle = document.querySelector(`.${handle.resize}`);
+        const rotateHandle = document.querySelector(`.${handle.rotate}`);
+
+        if (resizeHandle && rotateHandle) {
+            resizeHandle.style.display = 'block';
+            rotateHandle.style.display = 'block';
+        }
+        isDragging = true;
+        offsetX = e.clientX - element.offsetLeft;
+        offsetY = e.clientY - element.offsetTop;
+        element.style.cursor = 'grabbing';
+
     });
 
     document.addEventListener('mousemove', function (e) {
         if (isDragging) {
-            const collageFrame = document.querySelector('.collage-frame');
-            const frameRect = collageFrame.getBoundingClientRect();
-            const elementRect = element.getBoundingClientRect();
-
-            let newLeft = e.clientX - offsetX;
-            let newTop = e.clientY - offsetY;
-
-            // Constrain within collage frame
-            if (newLeft < 0) newLeft = 0;
-            if (newTop < 0) newTop = 0;
-            if (newLeft + elementRect.width > frameRect.width) {
-                newLeft = frameRect.width - elementRect.width;
-            }
-            if (newTop + elementRect.height > frameRect.height) {
-                newTop = frameRect.height - elementRect.height;
-            }
-
-            element.style.left = newLeft + 'px';
-            element.style.top = newTop + 'px';
+            element.style.left = e.clientX - offsetX + 'px';
+            element.style.top = e.clientY - offsetY + 'px';
         }
     });
 
@@ -246,6 +240,8 @@ function makeDraggable(element, handle) {
 
     document.addEventListener('mousedown', function (e) {
         if (!element.contains(e.target)) {
+            element.style.border = 'none';
+
             const resizeHandle = document.querySelector(`.${handle.resize}`);
             const rotateHandle = document.querySelector(`.${handle.rotate}`);
 

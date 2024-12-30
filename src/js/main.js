@@ -49,7 +49,7 @@ document.querySelectorAll(".small-img, .big-img").forEach((slot) => {
 function incrementUploadedImages() {
     uploadedImagesCount++;
     if (totalImages === uploadedImagesCount) {
-        document.getElementById("downloadBtn").style.display = "block";
+        downloadBtn.style.display = "block";
     }
 }
 

@@ -65,7 +65,6 @@ body {
     display: grid;
     grid-template-columns: 2fr 1fr 1fr;
     grid-template-rows: 1fr 1fr;
-    
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
@@ -188,15 +187,6 @@ body {
     display: none;
     cursor: pointer;
 }
-
-.text-box {
-    display: inline-block;
-    width: auto;
-    height: auto;
-    padding: 10px;
-    user-select: none;
-}
-
 .text-box {
     position: absolute;
     top: 50%;
@@ -206,6 +196,7 @@ body {
     cursor: move;
     border: 2px dashed transparent;
     padding: 5px;
+    overflow: hidden;
 }
 
 .resize-handle {

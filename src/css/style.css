@@ -61,11 +61,11 @@ body {
 .collage-frame {
     width: 500px;
     height: 400px;
-    background: #eee;
+    background: white;
     display: grid;
     grid-template-columns: 2fr 1fr 1fr;
     grid-template-rows: 1fr 1fr;
-    gap: 1px;
+    
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
 

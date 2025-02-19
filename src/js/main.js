@@ -134,6 +134,9 @@ function updatePreview() {
         activeTextBox.innerText = text;
         activeTextBox.style.color = textColor;
         attachHandles(activeTextBox);
+        document.querySelectorAll('option').forEach(option => {
+            option.textContent = `${text}`;
+        });
     }
 }
 
